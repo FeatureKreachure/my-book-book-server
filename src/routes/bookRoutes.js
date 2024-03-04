@@ -36,7 +36,6 @@ router.post("/email/:email", async (req, res) => {
 
     const book = new Book(bookData);
     await book.save();
-    console.log("added book: ", book);
     res.status(201).send(book);
   } catch (error) {
     console.error(error);

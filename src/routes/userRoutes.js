@@ -10,10 +10,8 @@ const bcrypt = require("bcryptjs");
 router.post("/dummy", async (req, res) => {
   try {
     const { name, email, password } = req.body;
-    console.log("new user data: ", name, email, password);
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    console.log(hashedPassword);
 
     // Send a response along with the status code
     return res.status(201).json({ message: "User created successfully" });
@@ -72,24 +70,10 @@ router.post("/bymail", async (req, res) => {
   try {
     const { email } = req.body;
     const user = await User.findOne({ email });
-    
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-    console.log("User Found: ", user)
-
-    // Hash the provided password
-    // const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Compare the hashed provided password with the hashed password in the database
-    // const passwordMatch = await bcrypt.compare(password, user.password);
-
-    // if (!passwordMatch) {
-    //   return res.status(401).json({ message: "Incorrect password" });
-    // }
-
-    // Passwords match, you can now return the user or perform other operations
     res.status(200).json(user);
   } catch (error) {
     console.error(error);
