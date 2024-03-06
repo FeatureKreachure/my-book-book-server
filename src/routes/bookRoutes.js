@@ -76,35 +76,6 @@ router.get("/user/:userId", async (req, res) => {
   }
 });
 
-// Fetch paginated books for a specific user
-// router.get("/user/:userId", async (req, res) => {
-//   const userId = req.params.userId;
-//   const page = parseInt(req.query.page) || 1;
-//   const pageSize = parseInt(req.query.pageSize) || 5; // Adjust as needed
-
-//   try {
-//     // Query for total count and paginated books
-//     const [totalCount, books] = await Promise.all([
-//       Book.countDocuments({ user: userId }),
-//       Book.find({ user: userId })
-//         .skip((page - 1) * pageSize)
-//         .limit(pageSize),
-//     ]);
-
-//     const totalPages = Math.ceil(totalCount / pageSize);
-
-//     res.send({
-//       totalCount,
-//       totalPages,
-//       currentPage: page,
-//       pageSize,
-//       books,
-//     });
-//   } catch (error) {
-//     res.status(500).send(error);
-//   }
-// });
-
 // Get all books with optional parameters to populate characters and additional fields
 router.get("/", async (req, res) => {
   const { userId, public } = req.query; // Extract userId and public from query parameters
